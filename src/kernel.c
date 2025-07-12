@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include <stdint.h>
+#include "shell.c"
 
 // The base address for all peripheral registers on the Raspberry Pi 4.
 static const uint32_t MMIO_BASE = 0xFE000000;
@@ -112,8 +113,8 @@ void kmain(void) {
     uart_init();
     uart_puts("Welcome to SaleriOS!!!\r\n");
 
-    // Loop forever, echoing any character received.
-    while (1) {
-        uart_putc(uart_getc());
-    }
+    char input[512];
+    int pos = 0;
+    input[0] = '\0'; // Initialize buffer as empty
+    shell();
 }
